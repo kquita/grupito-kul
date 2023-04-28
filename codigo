@@ -1,0 +1,41 @@
+// nombre: silvana olivares, pilar vergara, valentina fuentes
+// al mover la perilla
+// cambia la intensidad de la luz
+// una luz incrementa y la otra decrece
+
+// fuentes
+// https://github.com/kquita/aud5i022-2023-1/blob/main/kquita/clase_21_04/clase_21_04.ino
+
+int patitaLuz0 = 5;
+int patitaLuz1 = 6;
+
+//entrada analogica
+int estadoPerilla;
+
+// salidas analogicas
+int luz0;
+int luz1;
+
+void setup() {
+
+  pinMode(patitaLuz0, OUTPUT);
+  pinMode(patitaLuz1, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  estadoPerilla = analogRead(A0);
+  Serial.println(estadoPerilla);
+
+
+  // se divide para bajar la resolucion, al ser dos enteros el resultado va a ser un entero, lo demás es sobrante y lo ignora
+  
+  luz0 = estadoPerilla / 4;
+  analogWrite(patitaLuz0, luz0);
+  
+
+  // luz1 es el maximo menos luz0
+  // la suma de luz0 y luz1 siempre da 255
+  luz1 = 255 - luz0;
+  analogWrite(patitaLuz1, luz1);
+}
